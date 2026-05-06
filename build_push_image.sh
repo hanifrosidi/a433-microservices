@@ -41,8 +41,9 @@ image_menu() {
             docker push hanifrosidi/item-app:1
         elif [ "$menu" = "q" ]
         then
-            echo "program is finish"
-            echo "clear screan"
+            echo "=========================================="
+            echo "          Program Is Finished             "
+            echo "=========================================="
             sleep 3
             clear
             break
