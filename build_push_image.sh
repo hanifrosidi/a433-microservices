@@ -21,7 +21,7 @@ image_menu() {
         if [ "$menu" = "1" ]
         then
             clear
-            docker build -t item-app:1
+            docker build -t item-app:1 .
         elif [ "$menu" = "2" ]
         then
             clear
