@@ -46,7 +46,8 @@ image_menu() {
             sleep 3
             clear
             break
-        else 
+        else
+            clear
             echo "option is wrong"
         fi
 
