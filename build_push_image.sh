@@ -20,18 +20,23 @@ image_menu() {
 
         if [ "$menu" = "1" ]
         then
+            clear
             docker build -t item-app:1
         elif [ "$menu" = "2" ]
-        then 
+        then
+            clear
             docker image ls
         elif [ "$menu" = "3" ]
         then
+            clear
             echo "change your image"
         elif [ "$menu" = "4" ]
         then
+            clear
             docker login
         elif [ "$menu" = "5" ] 
         then
+            clear
             docker tag item-app:1 hanifrosidi/item-app:1
             docker push hanifrosidi/item-app:1
         elif [ "$menu" = "q" ]
