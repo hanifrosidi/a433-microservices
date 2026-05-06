@@ -41,6 +41,7 @@ image_menu() {
             docker push hanifrosidi/item-app:1
         elif [ "$menu" = "q" ]
         then
+            clear
             echo "=========================================="
             echo "          Program Is Finished             "
             echo "=========================================="
