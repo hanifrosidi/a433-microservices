@@ -31,7 +31,6 @@ image_menu() {
             clear
             echo "change image with docker hub format"
             docker tag item-app:1 hanifrosidi/item-app:1
-            clear
         elif [ "$menu" = "4" ]
         then
             clear
