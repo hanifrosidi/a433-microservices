@@ -11,7 +11,7 @@ version: "3.8"
 
 services:
   item-app:
-    image: hanifrosidi/item-app:1
+    image: hanifrosidi/item-app:v1
     container_name: item-app
     restart: always
     ports:

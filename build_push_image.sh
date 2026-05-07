@@ -24,7 +24,7 @@ image_menu() {
         then
             # If choice 1 clear screen & Build image
             clear
-            docker build -t item-app:1 .
+            docker build -t item-app:v1 .
         elif [ "$menu" = "2" ]
         then
             # If choice 2 clear screen & show list docker image
@@ -35,7 +35,7 @@ image_menu() {
             # If choice 3 clear screen & add tag already image with name structure docker hub
             clear
             echo "change image with docker hub format"
-            docker tag item-app:1 hanifrosidi/item-app:1
+            docker tag item-app:v1 hanifrosidi/item-app:v1
             echo "change name is succesfull"
             sleep 3
             clear
@@ -49,8 +49,8 @@ image_menu() {
         then
             # If choice 5 clear screen & tag image and then push to docker hub
             clear
-            docker tag item-app:1 hanifrosidi/item-app:1
-            docker push hanifrosidi/item-app:1
+            docker tag item-app:v1 hanifrosidi/item-app:v1
+            docker push hanifrosidi/item-app:v1
             clear
         elif [ "$menu" = "q" ]
         then
