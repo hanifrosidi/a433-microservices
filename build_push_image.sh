@@ -16,18 +16,23 @@ image_menu() {
         echo "======================================================="
         echo "Choose menu number!"
 
+        # Get input user and store in menu variable
         read -r menu
 
+        # Checking condition menu choice 1,2,3,4,5 
         if [ "$menu" = "1" ]
         then
+            # If choice 1 clear screen & Build image
             clear
             docker build -t item-app:1 .
         elif [ "$menu" = "2" ]
         then
+            # If choice 2 clear screen & show list docker image
             clear
             docker image ls
         elif [ "$menu" = "3" ]
         then
+            # If choice 3 clear screen & add tag already image with name structure docker hub
             clear
             echo "change image with docker hub format"
             docker tag item-app:1 hanifrosidi/item-app:1
@@ -36,17 +41,20 @@ image_menu() {
             clear
         elif [ "$menu" = "4" ]
         then
+            # If choice 4 clear screen & login to docker hub
             clear
             docker login
             clear
         elif [ "$menu" = "5" ] 
         then
+            # If choice 5 clear screen & tag image and then push to docker hub
             clear
             docker tag item-app:1 hanifrosidi/item-app:1
             docker push hanifrosidi/item-app:1
             clear
         elif [ "$menu" = "q" ]
         then
+            # If choice q program is ended & clear screen
             clear
             echo "=========================================="
             echo "          Program Is Finished             "
@@ -64,6 +72,7 @@ image_menu() {
 
 
 main() {
+    # Run image_menu function 
    image_menu
 }
 

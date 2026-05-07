@@ -1,9 +1,19 @@
 version: "3.8"
 
+# This application uses:
+# - Node.js
+# - MongoDB
+# - Docker Compose
+#
+# Environment: Production
+# Port: 80:8080
+# Volumes: app-db:/data/db
+
 services:
   item-app:
     image: hanifrosidi/item-app:1
     container_name: item-app
+    restart: always
     ports:
       - "80:8080"
     depends_on:
@@ -11,6 +21,7 @@ services:
 
   item-db:
     image: mongo:3
+    restart: always
     container_name: item-db
     volumes:
       - app-db:/data/db
