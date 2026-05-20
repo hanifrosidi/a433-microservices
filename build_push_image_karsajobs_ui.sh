@@ -2,7 +2,7 @@
 
 build_image() {
     echo "build image starting.................."
-    docker build -t hanifrosidi/karsajobs-ui:latest
+    docker build -t hanifrosidi/karsajobs-ui:latest .
 }
 
 login_docker_repo() {
