@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metaData:
+  name: karsajobs-ui
+  labels:
+    app: karsajobs-ui
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: karsajobs-ui
+  template:
+    metadata:
+      labels:
+        app: karsajobs-ui
+    spec:
+      containers:
+        - name: karsajobs-ui-container
+          image: hanifrosidi/karsajobs-ui
+          ports:
+            - containerPort: 8000
+          resources:
+            requests:
+              memory: "500Mi"
+              cpu: "250m"
+            limits:
+              memory: "700Mi"
+              cpu: "250m"
+          env:
+            - name: ENVIRONMENT
+              value: "production"
+            - name: VUE_APP_BACKEND
+              value: "http://karsajobs-api-service:8080"
