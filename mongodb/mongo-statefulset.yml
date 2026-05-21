@@ -24,28 +24,3 @@ spec:
               value: /etc/mongo-credentials/admin
             - name: MONGO_INITDB_ROOT_PASSWORD_FILE
               value: /etc/mongo-credentials/supersecretpassword
-          volumeMounts:
-            # Persistent Volume
-            - name: mongodb-storage
-              mountPath: /data/db
-
-            # ConfigMap
-            - name: mongodb-config
-              mountPath: /config
-
-            # Secret
-            - name: mongo-secret-volume
-              mountPath: /etc/mongo-credentials
-              readOnly: true
-      volumes:
-        # ConfigMap volume
-        - name: mongodb-config
-          configMap:
-            name: mongodb-config
-        # Secret volume
-        - name: mongo-secret-volume
-          secret:
-            secretName: mongodb-secret
-        - name: mongodb-storage
-          persistentVolumeClaim:
-            claimName: mongodb-pvc
