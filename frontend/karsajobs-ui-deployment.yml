@@ -1,6 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
-metaData:
+metadata:
   name: karsajobs-ui
   labels:
     app: karsajobs-ui
