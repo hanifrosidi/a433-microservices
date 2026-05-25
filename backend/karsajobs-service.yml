@@ -1,14 +1,41 @@
+# Versi API Kubernetes yang digunakan
 apiVersion: v1
+
+# Jenis resource kubernetes
 kind: Service
+
+# Metadata resource
 metadata:
+  # Nama service
   name: karsajobs-api-service
+
+# Spesifikasi service
 spec:
+  # Jenis service
+  # NodePort memungkinkan service diakses dari luar cluster
+  # menggunakan IP node dan port tertentu
   type: NodePort
+
+  # Selector untuk memilih pod target
   selector:
+    # Service akan mengarahkan traffic
+    # ke pod dengan label app=karsajobs
     app: karsajobs
 
+  # Konfigurasi port service
   ports:
+    # Daftar port yang digunakan service
     - protocol: TCP
+
+      # Port service di dalam cluster Kubernetes
+      # Pod lain dapat mengakses melalui port ini
       port: 8080
+
+      # Port tujuan di container/pod
+      # Traffic akan diteruskan ke port 8080 container
       targetPort: 8080
+
+      # Port yang dibuka di node Kubernetes
+      # Digunakan untuk akses dari luar cluster
+      # Range default NodePort: 30000-32767
       nodePort: 30081

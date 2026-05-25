@@ -1,34 +1,75 @@
+# Versi API Kubernetes yang digunakan
 apiVersion: apps/v1
+
+# Jenis resource Kubernetes
 kind: Deployment
+
+# Metadata deployment
 metadata:
+  # Nama deployment
   name: karsajobs-ui
+
+  # Label deployment
   labels:
+    # Label aplikasi frontend
     app: karsajobs-ui
+
+# Spesifikasi deployment
 spec:
+  # Jumlah replica pod yang dijalankan
   replicas: 2
 
+  # Selector untuk memilih pod yang dikelola deployment
   selector:
     matchLabels:
+      # Deployment akan mengelola pod dengan label ini
       app: karsajobs-ui
+
+  # Template pod yang akan dibuat
   template:
+    # Metadata pod
     metadata:
+      # Label pod
       labels:
+        # Label frontend pod
         app: karsajobs-ui
+
+    # Spesifikasi pod
     spec:
+      # Daftar container dalam pod
       containers:
+        # Konfigurasi container frontend
         - name: karsajobs-ui-container
+
+          # Docker image frontend yang digunakan
           image: hanifrosidi/karsajobs-ui
+
+          # Port yang dibuka oleh container
           ports:
+            # Port aplikasi frontend di dalam container
             - containerPort: 8000
+
+          # Pengaturan resource container
           resources:
+            # Resource minimum yang disetting
             requests:
+              # Minimal memory yang digunakan
               memory: "500Mi"
+              # Minimal cpu yang digunakan
               cpu: "250m"
+            # Resource maksimum yang disetting
             limits:
+              # Maksimal memory yang digunakan
               memory: "700Mi"
+              # Maksimal cpu yang digunakan
               cpu: "250m"
+
+          # Environment variable untuk container
           env:
+            # Environment aplikasi frontend
             - name: ENVIRONMENT
               value: "production"
+
+            # URL backend API yang akan diakses frontend
             - name: VUE_APP_BACKEND
               value: "http://192.168.49.2:8080"
