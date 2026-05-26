@@ -48,7 +48,7 @@ push_image_Github_Registry() {
     echo "push image starting..........................."
 
     # Memberikan tag image docker
-    docker tag karsajobs:latest ghcr.io/hanifrosidi/karsajobs:latest
+    docker tag hanifrosidi/karsajobs:latest ghcr.io/hanifrosidi/karsajobs:latest
 
     # Mengirim image ke Github Container Registry
     docker push ghcr.io/hanifrosidi/karsajobs:latest
