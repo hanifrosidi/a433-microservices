@@ -28,7 +28,7 @@ login_github_container_registry() {
     read -p "Masukkan username github : " username
 
     # Menjalankan perintah login Github Container Registry
-    echo YOUR_GITHUB_TOKEN | docker login ghcr.io -u YOUR_GITHUB_USERNAME --password-stdin
+    echo $token | docker login ghcr.io -u $username --password-stdin
 }
 
 # Fungsi untuk push image ke Docker hub
