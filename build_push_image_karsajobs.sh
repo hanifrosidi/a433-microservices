@@ -18,6 +18,19 @@ login_docker_repo() {
     docker login
 }
 
+# Fungsi untuk login github container registry
+login_github_container_registry() {
+    # Menampilkan informasi proses login dimulai
+    echo "login github container registry starting............"
+
+    # Input github token & username
+    read -p "Masukkan github token : " token
+    read -p "Masukkan username github : " username
+
+    # Menjalankan perintah login Github Container Registry
+    echo YOUR_GITHUB_TOKEN | docker login ghcr.io -u YOUR_GITHUB_USERNAME --password-stdin
+}
+
 # Fungsi untuk push image ke Docker hub
 push_image() {
     # Menampilkan informasi proses push dimulai
@@ -28,6 +41,17 @@ push_image() {
 
     # Mengirim image ke Docker Hub repository
     docker push hanifrosidi/karsajobs:latest
+}
+
+push_image_Github_Registry() {
+    # Menampilkan informasi proses push
+    echo "push image starting..........................."
+
+    # Memberikan tag image docker
+    docker tag karsajobs:latest ghcr.io/hanifrosidi/karsajobs:latest
+
+    # Mengirim image ke Github Container Registry
+    docker push ghcr.io/hanifrosidi/karsajobs:latest
 }
 
 # Fungsi untuk mengakhiri program
@@ -58,7 +82,9 @@ main() {
         # Menu pilihan
         echo "1. Build Docker Image"
         echo "2. Login To Docker Hub"
-        echo "3. Push Docker Image To Docker Hub"
+        echo "3. Login To Github Container Registry"
+        echo "4. Push Docker Image To Docker Hub"
+        echo "5. Push Docker Image To Github Container Registry"
         echo "==========================================================="
         
         # Informasi input menu
@@ -76,7 +102,11 @@ main() {
         elif [ "$menu" = "2" ]; then
             login_docker_repo
         elif [ "$menu" = "3" ]; then
+            login_github_container_registry
+        elif [ "$menu" = "4" ]; then
             push_image
+        elif [ "$menu" = "5" ]; then
+            push_image_Github_Registry
         elif [ "$menu" = "q" ]; then
             finish_program
             break
