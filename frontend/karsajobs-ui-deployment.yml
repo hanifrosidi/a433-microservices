@@ -72,4 +72,4 @@ spec:
 
             # URL backend API yang akan diakses frontend
             - name: VUE_APP_BACKEND
-              value: "http://192.168.49.2:8080"
+              value: "http://192.168.59.100:30081"
