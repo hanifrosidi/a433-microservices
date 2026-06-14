@@ -1,0 +1,31 @@
+# Versi API Kubernetes yang digunakan
+apiVersion: v1
+
+# Jenis resource kubernetes
+kind: Service
+
+# Metadata resource
+metadata:
+  # Nama service
+  name: mongodb-service
+
+# Spesifikasi service
+spec:
+  # Jenis service
+  # ClusterIP service yang tidak dapat diakses dari luar cluster
+  type: ClusterIP
+
+  # Selector untuk memilih pod target
+  selector:
+    # Service akan mengarahkan traffic
+    # ke pod dengan label app=mongodb
+    app: mongodb
+
+  # Service port
+  ports:
+    # Daftar port yang digunakan service
+    - protocol: TCP
+      # Port service
+      port: 27017
+      # Port container
+      targetPort: 27017

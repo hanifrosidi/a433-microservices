@@ -1,0 +1,89 @@
+# Versi API Kubernetes yang digunakan
+apiVersion: apps/v1
+
+# Jenis resource yang dibuat
+kind: Deployment
+
+# Metada / informasi resource
+metadata:
+  # Nama Deployment
+  name: karsajobs
+
+  # Label deployment untuk identifikasi resource
+  labels:
+    # Label app dengan value karsajobs
+    app: karsajobs
+
+# Spesifikasi deployment
+spec:
+  # Jumlah pod yang dijalankan
+  replicas: 2
+
+  # Selector untuk mencocokkan pod yang dikelola deployment
+  selector:
+    matchLabels:
+      # Deployment akan mengelola pod dengan label ini
+      app: karsajobs
+  # Template pod yang akan dibuat deployment
+  template:
+    metadata:
+      # Label pod
+      labels:
+        # Label app pada pod
+        app: karsajobs
+    spec:
+      # Daftar container dalam pod
+      containers:
+        # Konfigurasi container utama
+        - name: karsajobs-container
+          # Image docker yang digunakan
+          image: hanifrosidi/karsajobs
+          # Port yang dibuka oleh container
+          ports:
+            - containerPort: 8080
+          # Resource limit dan request container
+          resources:
+            # Resource minimum yang dijamin kubernetes
+            requests:
+              # Minimal memory yang dibutuhkan
+              memory: "500Mi"
+              # Minimal cpu yang dibutuhkan
+              cpu: "250m"
+            # Batas maksimal resource yang boleh digunakan
+            limits:
+              # Maksimal memory
+              memory: "700Mi"
+              # Maksimal cpu
+              cpu: "250m"
+          # Environment variable container
+          env:
+            # Environment aplikasi
+            - name: ENVIRONMENT
+              # value environment
+              value: "production"
+            # Port aplikasi didalam container
+            - name: "APP_PORT"
+              # Port aplikasi
+              value: "8080"
+            # Host mongodb
+            - name: MONGO_HOST
+              # Nama service MongoDB di Kubernetes
+              value: "mongodb-service"
+            # Username MongoDB dari Secret Kubernetes
+            - name: MONGO_USER
+              # Mengambil value dari Secret
+              valueFrom:
+                secretKeyRef:
+                  # Nama secret
+                  name: mongodb-secret
+                  # Key pada secret
+                  key: MONGO_ROOT_USERNAME
+            # Password MongoDB dari Secret Kubernetes
+            - name: MONGO_PASS
+              # Mengambil value dari secret
+              valueFrom:
+                secretKeyRef:
+                  # Nama secret
+                  name: mongodb-secret
+                  # Key pada secret
+                  key: MONGO_ROOT_PASSWORD

@@ -1,0 +1,2 @@
+karsajobs-image: ghcr.io/hanifrosidi/karsajobs:latest
+karsajobs-ui-image: ghcr.io/hanifrosidi/karsajobs-ui:latest

@@ -1,0 +1,27 @@
+# Versi API Kubernetes yang digunakan
+apiVersion: v1
+
+# Jenis resource Kubernetes
+kind: PersistentVolumeClaim
+
+# Metadata resource
+metadata:
+  # Nama PersistentVolumeClaim
+  name: mongodb-pvc
+
+# Spesifikasi pvc
+spec:
+  # Mode akses volume
+  accessModes:
+    # ReadWriteOnce:
+    # Volume dapat di-mount sebagai read-write
+    # oleh satu node pada satu waktu
+    - ReadWriteOnce
+
+  # Resource yang diminta oleh PVC
+  resources:
+    # Permintaan resource storage
+    requests:
+      # Kapasitas penyimpanan yang diminta
+      # 5Gi = 5 Gibibyte
+      storage: 5Gi

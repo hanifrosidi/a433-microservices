@@ -1,0 +1,26 @@
+NAME                                                       READY   STATUS              RESTARTS   AGE
+pod/monitoring-grafana-64b4b8b565-jsdwh                    0/3     ContainerCreating   0          33s
+pod/monitoring-kube-prometheus-operator-7cd45c8468-qdkpj   0/1     ContainerCreating   0          33s
+pod/monitoring-kube-state-metrics-868694bc4b-fn7d9         0/1     Running             0          33s
+pod/monitoring-prometheus-node-exporter-fcjvh              1/1     Running             0          33s
+
+NAME                                              TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)             AGE
+service/monitoring-grafana                        ClusterIP   10.102.38.224   <none>        80/TCP              33s
+service/monitoring-kube-prometheus-alertmanager   ClusterIP   10.100.85.120   <none>        9093/TCP,8080/TCP   33s
+service/monitoring-kube-prometheus-operator       ClusterIP   10.103.210.42   <none>        443/TCP             33s
+service/monitoring-kube-prometheus-prometheus     ClusterIP   10.110.14.232   <none>        9090/TCP,8080/TCP   33s
+service/monitoring-kube-state-metrics             ClusterIP   10.96.171.120   <none>        8080/TCP            33s
+service/monitoring-prometheus-node-exporter       ClusterIP   10.97.192.44    <none>        9100/TCP            33s
+
+NAME                                                 DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR            AGE
+daemonset.apps/monitoring-prometheus-node-exporter   1         1         1       1            1           kubernetes.io/os=linux   33s
+
+NAME                                                  READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/monitoring-grafana                    0/1     1            0           33s
+deployment.apps/monitoring-kube-prometheus-operator   0/1     1            0           33s
+deployment.apps/monitoring-kube-state-metrics         0/1     1            0           33s
+
+NAME                                                             DESIRED   CURRENT   READY   AGE
+replicaset.apps/monitoring-grafana-64b4b8b565                    1         1         0       33s
+replicaset.apps/monitoring-kube-prometheus-operator-7cd45c8468   1         1         0       33s
+replicaset.apps/monitoring-kube-state-metrics-868694bc4b         1         1         0       33s

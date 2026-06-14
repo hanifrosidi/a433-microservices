@@ -1,0 +1,19 @@
+# Versi API Kubernetes yang digunakan
+apiVersion: v1
+
+# Jenis resource yang digunakan kubernetes
+kind: ConfigMap
+
+# Metadata resource
+metadata:
+  # nama configmap
+  name: mongodb-config
+
+# Data konfigurasi yang disimpan di ConfigMap
+data:
+  # Nama file konfigurasi yang akan dibuat
+  mongo.conf: |
+    # Konfigurasi storage mongodb
+    storage:
+      # Lokasi penyimpanan database MongoDB di dalam container
+      dbPath: /data/db

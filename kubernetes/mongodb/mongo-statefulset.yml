@@ -1,0 +1,83 @@
+# Versi API Kubernetes yang digunakan
+apiVersion: apps/v1
+
+# Jenis resource kubernetes
+kind: StatefulSet
+
+# Metadata resource
+metadata:
+  # Nama StatefulSet
+  name: mongodb
+
+# Spesifikasi StatefulSet
+spec:
+  # Nama service headless/service yang digunakan StatefulSet
+  # untuk identitas network pod
+  serviceName: mongodb
+
+  # Jumlah replica pod MongoDB
+  replicas: 1
+
+  # Selector untuk memilih pod yang dikelola StatefulSet
+  selector:
+    matchLabels:
+      # StatefulSet akan mengelola pod
+      # dengan label app=mongodb
+      app: mongodb
+
+  # Template pod yang akan dibuat
+  template:
+    # Metadata pod
+    metadata:
+      # Label pod
+      labels:
+        # Label aplikasi MongoDB
+        app: mongodb
+    # Spesifikasi pod
+    spec:
+      containers:
+        # Daftar container dalam pod
+        - name: mongodb
+          # Docker image yang digunakan dalam container
+          image: mongo:latest
+          # Port yang digunakan container
+          ports:
+            - containerPort: 27017
+          # Environment variable MongoDB
+          env:
+            # Lokasi file username root MongoDB
+            - name: MONGO_INITDB_ROOT_USERNAME_FILE
+              # Path file username dari Secret
+              value: /etc/mongo-credentials/MONGO_ROOT_USERNAME
+            # Lokasi file password root MongoDB
+            - name: MONGO_INITDB_ROOT_PASSWORD_FILE
+              # Path file password dari Secret
+              value: /etc/mongo-credentials/MONGO_ROOT_PASSWORD
+          # Mount volume ke dalam container
+          volumeMounts:
+            # Persistent Volume untuk penyimpanan database
+            - name: mongodb-storage
+              mountPath: /data/db
+
+            # Mount ConfigMap
+            - name: mongodb-config
+              mountPath: /config
+
+            # Mount Secret
+            - name: mongo-secret-volume
+              mountPath: /etc/mongo-credentials
+              readOnly: true
+      # Daftar volume yang digunakan pod
+      volumes:
+        # Volume dari ConfigMap
+        - name: mongodb-config
+          configMap:
+            name: mongodb-config
+        # Volume dari Secret
+        - name: mongo-secret-volume
+          secret:
+            secretName: mongodb-secret
+        # Volume dari PersistentVolumeClaim
+        - name: mongodb-storage
+          persistentVolumeClaim:
+            claimName: mongodb-pvc
