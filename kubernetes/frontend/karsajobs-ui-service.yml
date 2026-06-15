@@ -29,7 +29,7 @@ spec:
 
       # Port service di dalam cluster Kubernetes
       # Pod lain dapat mengakses melalui port ini
-      port: 80
+      port: 8000
 
       # Port tujuan di container/pod
       # Traffic akan diteruskan ke port 8080 container
