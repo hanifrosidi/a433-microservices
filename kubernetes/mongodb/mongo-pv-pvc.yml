@@ -1,3 +1,28 @@
+# PersistentVolume
+apiVersion: v1
+
+kind: PersistentVolume
+
+metadata:
+  name: mongodb-pv
+
+spec:
+  # Capacity storage
+  capacity:
+    storage: 5Gi
+
+  # Access mode
+  accessModes:
+    - ReadWriteOnce
+
+  # Storage class (must match PVC)
+  storageClassName: manual
+
+  # Local storage path
+  hostPath:
+    path: /data/mongodb
+    type: DirectoryOrCreate
+---
 # Versi API Kubernetes yang digunakan
 apiVersion: v1
 
